@@ -366,7 +366,7 @@ export const Collection: React.FC<CollectionProps> = ({ onSelectWatch }) => {
       {/* ─────────────────────────────────────────────────────────── */}
       {/* 2. MOBILE RESPONSIVE VERTICAL CATALOG (Native Scroll)        */}
       {/* ─────────────────────────────────────────────────────────── */}
-      <div className="flex md:hidden flex-col w-full px-5 py-16 space-y-10">
+      <div className="flex md:hidden flex-col w-full px-4 xs:px-5 pt-16 pb-36 space-y-8">
         {/* Mobile Header */}
         <div className="border-b border-black/[0.08] pb-4">
           <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#777] uppercase mb-1">
@@ -387,7 +387,7 @@ export const Collection: React.FC<CollectionProps> = ({ onSelectWatch }) => {
             <div
               key={prod.id}
               onClick={() => onSelectWatch && onSelectWatch(prod)}
-              className={`p-6 rounded-3xl border border-black/[0.08] shadow-[0_15px_35px_-10px_rgba(0,0,0,0.12),0_4px_12px_-2px_rgba(0,0,0,0.05)] flex flex-col justify-between cursor-pointer active:scale-[0.99] transition-all ${
+              className={`p-5 xs:p-6 rounded-3xl border border-black/[0.08] shadow-[0_15px_35px_-10px_rgba(0,0,0,0.12),0_4px_12px_-2px_rgba(0,0,0,0.05)] flex flex-col justify-between cursor-pointer active:scale-[0.99] transition-all ${
                 prod.isDark ? 'bg-[#151619] text-white' : 'bg-white text-black'
               }`}
             >
@@ -400,7 +400,7 @@ export const Collection: React.FC<CollectionProps> = ({ onSelectWatch }) => {
                 </span>
               </div>
 
-              <div className="relative w-full aspect-square flex items-center justify-center my-3">
+              <div className="relative w-full aspect-square max-w-[280px] xs:max-w-[320px] mx-auto flex items-center justify-center my-3">
                 <img
                   src={prod.image}
                   alt={prod.name}

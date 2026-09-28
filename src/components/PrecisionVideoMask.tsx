@@ -198,9 +198,9 @@ export const PrecisionVideoMask: React.FC<PrecisionVideoMaskProps> = ({
         {/* Subtle Luxury Top Architectural Label */}
         <div
           ref={topMetaRef}
-          className="absolute top-10 sm:top-14 left-0 w-full z-30 px-8 sm:px-16 flex items-center justify-between pointer-events-none text-[10px] sm:text-xs font-mono tracking-[0.28em] text-neutral-400 uppercase"
+          className="absolute top-16 sm:top-14 left-0 w-full z-30 px-4 sm:px-16 flex items-center justify-between pointer-events-none text-[9px] sm:text-xs font-mono tracking-[0.20em] sm:tracking-[0.28em] text-neutral-400 uppercase"
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
             <span>SWISS HOROLOGICAL CINEMA</span>
           </div>
@@ -311,7 +311,7 @@ export const PrecisionVideoMask: React.FC<PrecisionVideoMaskProps> = ({
         {/* Subtle Luxury Bottom Architectural Coordinates */}
         <div
           ref={bottomMetaRef}
-          className="absolute bottom-10 sm:bottom-14 left-0 w-full z-30 px-8 sm:px-16 flex items-center justify-between pointer-events-none text-[10px] sm:text-xs font-mono tracking-[0.28em] text-neutral-400 uppercase"
+          className="absolute bottom-20 sm:bottom-14 left-0 w-full z-30 px-4 sm:px-16 flex items-center justify-between pointer-events-none text-[9px] sm:text-xs font-mono tracking-[0.20em] sm:tracking-[0.28em] text-neutral-400 uppercase"
         >
           <span className="opacity-60">MANUFACTURE EN SUISSE</span>
           <div className="flex items-center gap-2">

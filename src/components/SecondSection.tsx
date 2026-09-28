@@ -259,18 +259,18 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
             {/* ── STORY CHAPTER 01: INITIAL MANIFESTO (Over Left Side) ── */}
             <div
               ref={chapter1Ref}
-              className="absolute left-6 sm:left-12 md:left-16 lg:left-24 top-1/2 -translate-y-1/2 z-30 max-w-xl lg:max-w-2xl px-2 pointer-events-none"
+              className="absolute left-4 sm:left-12 md:left-16 lg:left-24 top-1/2 -translate-y-1/2 z-30 max-w-sm sm:max-w-xl lg:max-w-2xl px-2 pointer-events-none"
             >
-              <span className="text-xs sm:text-sm font-mono tracking-[0.3em] text-black font-extrabold uppercase block mb-3">
+              <span className="text-[10px] sm:text-sm font-mono tracking-[0.24em] sm:tracking-[0.3em] text-black font-extrabold uppercase block mb-2 sm:mb-3">
                 01 // MANIFESTO
               </span>
-              <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black leading-[0.92] font-black">
+              <h2 className="font-serif text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black leading-[0.94] sm:leading-[0.92] font-black">
                 <span className="block font-black">PRECISION</span>
                 <span className="block font-bold text-black">
                   IN EVERY SECOND.
                 </span>
               </h2>
-              <p className="mt-5 text-base sm:text-lg md:text-xl font-sans text-black font-bold max-w-lg leading-relaxed">
+              <p className="mt-3 sm:mt-5 text-xs sm:text-lg md:text-xl font-sans text-black font-bold max-w-lg leading-relaxed">
                 PRECISION creates watches where engineering, material and design come
                 together to create an experience that feels as precise as time itself.
               </p>
@@ -279,18 +279,18 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
             {/* ── STORY CHAPTER 02: ENGINEERED FOR PRECISION (Over Right Side) ── */}
             <div
               ref={chapter2Ref}
-              className="absolute right-6 sm:right-12 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 z-30 max-w-lg lg:max-w-xl px-2 text-right pointer-events-none opacity-0"
+              className="absolute right-4 sm:right-12 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 z-30 max-w-sm sm:max-w-lg lg:max-w-xl px-2 text-right pointer-events-none opacity-0"
             >
-              <span className="text-xs sm:text-sm font-mono tracking-[0.3em] text-black font-extrabold uppercase block mb-3">
+              <span className="text-[10px] sm:text-sm font-mono tracking-[0.24em] sm:tracking-[0.3em] text-black font-extrabold uppercase block mb-2 sm:mb-3">
                 02 // TOLERANCE & CHRONOMETRY
               </span>
-              <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-black leading-[0.94] font-black">
+              <h2 className="font-serif text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-black leading-[0.96] sm:leading-[0.94] font-black">
                 <span className="block font-black">ENGINEERED</span>
                 <span className="block font-bold text-black">
                   FOR PRECISION.
                 </span>
               </h2>
-              <p className="mt-4 text-sm sm:text-base md:text-lg font-sans text-black font-bold leading-relaxed max-w-md ml-auto">
+              <p className="mt-3 sm:mt-4 text-xs sm:text-base md:text-lg font-sans text-black font-bold leading-relaxed max-w-md ml-auto">
                 Every contour, gear, and surface is machined to sub-micron accuracy.
                 Calibrated to eliminate mechanical resistance at every escapement oscillation.
               </p>
@@ -301,14 +301,14 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
               ref={chapter3Ref}
               className="absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-4 pointer-events-none opacity-0"
             >
-              <span className="text-xs sm:text-sm font-mono tracking-[0.3em] text-black font-extrabold uppercase block mb-3">
+              <span className="text-[10px] sm:text-sm font-mono tracking-[0.24em] sm:tracking-[0.3em] text-black font-extrabold uppercase block mb-2 sm:mb-3">
                 CALIBRE P-9000 // IN-HOUSE ARCHITECTURE
               </span>
-              <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black leading-tight font-black">
+              <h2 className="font-serif text-3xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black leading-tight font-black">
                 THE MOVEMENT <br />
                 <span className="font-bold text-black">IS THE HEART.</span>
               </h2>
-              <div className="mt-6 inline-flex items-center gap-4 sm:gap-6 px-6 py-3 rounded-full bg-white/95 backdrop-blur-md border border-black/20 text-xs sm:text-sm font-mono font-bold tracking-widest text-black uppercase shadow-lg">
+              <div className="mt-4 sm:mt-6 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-6 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/95 backdrop-blur-md border border-black/20 text-[10px] sm:text-xs font-mono font-bold tracking-wider sm:tracking-widest text-black uppercase shadow-lg max-w-[90vw]">
                 <span>28,800 VPH</span>
                 <span className="text-black/50">•</span>
                 <span>4 HERTZ FREQUENCY</span>
