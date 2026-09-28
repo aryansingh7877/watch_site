@@ -26,10 +26,10 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeNav, onNavClic
             <button
               key={item}
               onClick={() => onNavClick(item)}
-              className="group relative flex-1 text-center py-0.5 sm:py-1 transition-all cursor-pointer min-w-0"
+              className="group relative flex-1 text-center py-1 transition-all cursor-pointer min-w-0 px-1"
             >
               <span
-                className={`font-display font-extrabold text-[10px] xs:text-xs sm:text-base md:text-lg lg:text-xl tracking-[0.08em] xs:tracking-[0.14em] sm:tracking-[0.20em] md:tracking-[0.24em] uppercase block whitespace-nowrap transition-all duration-300 ${
+                className={`font-display font-extrabold text-[8.5px] sm:text-xs md:text-sm lg:text-base tracking-[0.05em] sm:tracking-[0.16em] md:tracking-[0.22em] uppercase block whitespace-nowrap transition-all duration-300 ${
                   isActive
                     ? isDark
                       ? 'text-white translate-y-[-1px]'
@@ -44,7 +44,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeNav, onNavClic
 
               {/* Smooth active and hover underline indicator */}
               <div
-                className={`relative w-full max-w-[36px] xs:max-w-[48px] sm:max-w-[80px] md:max-w-[120px] mx-auto h-[2px] mt-1 sm:mt-1.5 overflow-hidden rounded-full transition-colors duration-300 ${
+                className={`relative w-full max-w-[24px] sm:max-w-[48px] md:max-w-[70px] mx-auto h-[1.5px] sm:h-[2px] mt-1 sm:mt-1.5 overflow-hidden rounded-full transition-colors duration-300 ${
                   isDark ? 'bg-white/20' : 'bg-black/20'
                 }`}
               >
