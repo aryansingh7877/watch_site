@@ -12,10 +12,13 @@ import { Collection } from './components/Collection';
 import { PrecisionVideoMask } from './components/PrecisionVideoMask';
 
 gsap.registerPlugin(ScrollTrigger);
+// Prevent iOS Safari address bar collapse/expand from triggering jarring ScrollTrigger recalculations
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('WATCHES');
   const [isDarkNav, setIsDarkNav] = useState(false);
+  const lenisRef = React.useRef<Lenis | null>(null);
 
   useEffect(() => {
     // Initialize Lenis smooth scroll
@@ -23,8 +26,9 @@ export default function App() {
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      syncTouch: false, // Let iOS Safari use native momentum touch scroll
     });
+    lenisRef.current = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -106,17 +110,19 @@ export default function App() {
   const handleNavClick = (item: string) => {
     setActiveNav(item);
 
+    const lenis = lenisRef.current;
     if (item === 'WATCHES') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (lenis) lenis.scrollTo(0);
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (item === 'ABOUT') {
-      const el = document.getElementById('about-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (lenis) lenis.scrollTo('#about-section');
+      else document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (item === 'CRAFT') {
-      const el = document.getElementById('assembly-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (lenis) lenis.scrollTo('#assembly-section');
+      else document.getElementById('assembly-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (item === 'COLLECTION') {
-      const el = document.getElementById('collection-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (lenis) lenis.scrollTo('#collection-section');
+      else document.getElementById('collection-section')?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

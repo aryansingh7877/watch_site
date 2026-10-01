@@ -24,26 +24,44 @@ export const PrecisionVideoMask: React.FC<PrecisionVideoMaskProps> = ({
     const video = videoRef.current;
     if (!video) return;
 
+    // Explicit iOS WebKit configurations
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const playVideo = () => {
+      video.play().catch(() => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    };
+
+    playVideo();
+
+    const handleGesture = () => {
+      if (video.paused) playVideo();
+    };
+
+    window.addEventListener('touchstart', handleGesture, { once: true, passive: true });
+    window.addEventListener('scroll', handleGesture, { once: true, passive: true });
+
     // Audio manager integration (sync muted state if user toggles global audio)
     const unsubscribe = audioManager.subscribe((isPlaying) => {
       if (video) {
         video.muted = !isPlaying;
         if (isPlaying) {
           video.volume = 0.8;
-          video.play().catch(() => {});
+          playVideo();
         }
       }
     });
 
-    // Ensure video is playing
-    video.play().catch(() => {
-      // Autoplay with muted is allowed by all browsers
-      video.muted = true;
-      video.play().catch(() => {});
-    });
-
     return () => {
       unsubscribe();
+      window.removeEventListener('touchstart', handleGesture);
+      window.removeEventListener('scroll', handleGesture);
     };
   }, []);
 
@@ -193,7 +211,7 @@ export const PrecisionVideoMask: React.FC<PrecisionVideoMaskProps> = ({
       {/* ─────────────────────────────────────────────────────────── */}
       <div
         ref={pinRef}
-        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#000000]"
+        className="sticky top-0 h-screen h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-[#000000]"
       >
         {/* Subtle Luxury Top Architectural Label */}
         <div
@@ -215,6 +233,7 @@ export const PrecisionVideoMask: React.FC<PrecisionVideoMaskProps> = ({
           <video
             ref={videoRef}
             src={videoSrc}
+            poster="/about_video_poster.webp"
             autoPlay
             loop
             muted

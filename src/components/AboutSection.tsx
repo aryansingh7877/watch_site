@@ -60,7 +60,7 @@ export const AboutSection: React.FC = () => {
             <span>ARCHIVE DOSSIER // CHAPTER 01</span>
           </div>
 
-          <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black font-normal leading-[0.9]">
+          <h2 className="font-serif text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black font-normal leading-[0.9]">
             <span className="block overflow-hidden">
               <span className="editorial-line-inner block font-medium">WE</span>
             </span>
@@ -85,7 +85,7 @@ export const AboutSection: React.FC = () => {
           <img
             src="/Luxury_watch_transparent.png"
             alt="PRECISION Atelier Calibre Watch"
-            className="w-auto h-[380px] sm:h-[440px] md:h-[500px] lg:h-[560px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.14)] select-none pointer-events-none"
+            className="w-auto h-[260px] xs:h-[320px] sm:h-[400px] md:h-[480px] lg:h-[560px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.14)] select-none pointer-events-none"
             loading="eager"
           />
         </div>
@@ -97,7 +97,7 @@ export const AboutSection: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-black" />
           </div>
 
-          <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black font-normal leading-[0.9]">
+          <h2 className="font-serif text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-black font-normal leading-[0.9]">
             <span className="block overflow-hidden">
               <span className="editorial-line-inner block font-medium">WE</span>
             </span>

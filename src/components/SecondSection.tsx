@@ -51,17 +51,41 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
       }
     };
 
-    // Preload about frames (240 WebP frames, total ~5.1MB)
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      img.src = `/about_frames/f_${String(i).padStart(3, '0')}.webp`;
-      img.onload = () => {
-        if (i === 0 && lastDrawnFrame === -1) {
-          drawFrame(0);
+    // 1. Load frame 0 immediately for instant paint
+    const img0 = new Image();
+    img0.src = '/about_frames/f_000.webp';
+    img0.onload = () => {
+      images[0] = img0;
+      if (lastDrawnFrame === -1) {
+        drawFrame(0);
+      }
+    };
+    images[0] = img0;
+
+    // 2. Preload remaining frames in progressive batches
+    let currentPreloadIdx = 1;
+    let cancelPreload = false;
+    const preloadBatch = () => {
+      if (cancelPreload) return;
+      const batchEnd = Math.min(frameCount, currentPreloadIdx + 12);
+      for (let i = currentPreloadIdx; i < batchEnd; i++) {
+        if (!images[i]) {
+          const img = new Image();
+          img.src = `/about_frames/f_${String(i).padStart(3, '0')}.webp`;
+          images[i] = img;
         }
-      };
-      images.push(img);
-    }
+      }
+      currentPreloadIdx = batchEnd;
+      if (currentPreloadIdx < frameCount) {
+        if ('requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(preloadBatch, { timeout: 150 });
+        } else {
+          setTimeout(preloadBatch, 50);
+        }
+      }
+    };
+
+    const idleTimer = setTimeout(preloadBatch, 200);
 
     const isMobile = window.innerWidth < 768;
     const scrollDistance = isMobile ? window.innerHeight * 3.5 : window.innerHeight * 5.5;
@@ -215,6 +239,8 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      cancelPreload = true;
+      clearTimeout(idleTimer);
       window.removeEventListener('resize', handleResize);
       if (ctx) ctx.revert();
     };
@@ -232,7 +258,7 @@ export const SecondSection: React.FC<SecondSectionProps> = ({ onExplore }) => {
       >
         <div
           ref={pinRef}
-          className="relative h-screen w-full flex items-center justify-center px-4 sm:px-8 md:px-12 overflow-hidden"
+          className="relative h-screen h-[100dvh] w-full flex items-center justify-center px-4 sm:px-8 md:px-12 overflow-hidden"
         >
 
           {/* ── FULL HERO CINEMATIC VIEWPORT STAGE ── */}

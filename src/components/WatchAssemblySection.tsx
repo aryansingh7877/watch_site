@@ -34,19 +34,41 @@ export const WatchAssemblySection: React.FC = () => {
       }
     };
 
-    // Preload frames progressively
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      img.src = `/assembly_frames/f_${String(i).padStart(3, '0')}.webp`;
-      img.onload = () => {
-        loadedCount++;
-        // As soon as the first frame loads, draw it immediately
-        if (i === 0 && lastDrawnFrame === -1) {
-          drawFrame(0);
+    // 1. Load frame 0 immediately for instant paint
+    const img0 = new Image();
+    img0.src = '/assembly_frames/f_000.webp';
+    img0.onload = () => {
+      images[0] = img0;
+      if (lastDrawnFrame === -1) {
+        drawFrame(0);
+      }
+    };
+    images[0] = img0;
+
+    // 2. Progressively preload remaining frames in non-blocking batches
+    let currentPreloadIdx = 1;
+    let cancelPreload = false;
+    const preloadBatch = () => {
+      if (cancelPreload) return;
+      const batchEnd = Math.min(frameCount, currentPreloadIdx + 12);
+      for (let i = currentPreloadIdx; i < batchEnd; i++) {
+        if (!images[i]) {
+          const img = new Image();
+          img.src = `/assembly_frames/f_${String(i).padStart(3, '0')}.webp`;
+          images[i] = img;
         }
-      };
-      images.push(img);
-    }
+      }
+      currentPreloadIdx = batchEnd;
+      if (currentPreloadIdx < frameCount) {
+        if ('requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(preloadBatch, { timeout: 150 });
+        } else {
+          setTimeout(preloadBatch, 50);
+        }
+      }
+    };
+
+    const idleTimer = setTimeout(preloadBatch, 150);
 
     // GSAP ScrollTrigger setup
     let st: ScrollTrigger | null = null;
@@ -79,6 +101,8 @@ export const WatchAssemblySection: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      cancelPreload = true;
+      clearTimeout(idleTimer);
       window.removeEventListener('resize', handleResize);
       if (st) st.kill();
     };
@@ -100,7 +124,7 @@ export const WatchAssemblySection: React.FC = () => {
       {/* ─────────────────────────────────────────────────────────── */}
       <div
         ref={pinRef}
-        className="relative h-screen w-full flex flex-col items-center justify-between px-4 sm:px-8 pt-16 pb-20 md:pt-18 md:pb-24 overflow-hidden bg-[#050505]"
+        className="relative h-screen h-[100dvh] w-full flex flex-col items-center justify-between px-4 sm:px-8 pt-16 pb-20 md:pt-18 md:pb-24 overflow-hidden bg-[#050505]"
       >
         {/* Cinematic Neutral Studio Glow (Adds depth behind the watch, no neon/colors) */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
